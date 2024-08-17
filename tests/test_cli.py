@@ -1,13 +1,12 @@
 import re
-import arrow
-from itertools import combinations
 from datetime import datetime, timedelta
+from itertools import combinations
 
+import arrow
 import pytest
 
 from watson import cli
 from watson.cli import local_tz_info
-
 
 # Not all ISO-8601 compliant strings are recognized by arrow.get(str)
 VALID_DATES_DATA = [

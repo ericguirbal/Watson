@@ -1,5 +1,6 @@
-import arrow
 import bisect
+
+import arrow
 
 # timestamps for fullmoons between year 2000 and 2099
 # data source http://home.hiwaay.net/~krcool/Astro/moon/fullmoon.htm

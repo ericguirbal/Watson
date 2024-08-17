@@ -1,12 +1,11 @@
 """Utility functions for the unit tests."""
 
-import os
 import datetime
-from unittest import mock
+import os
 from io import StringIO
+from unittest import mock
 
 import py
-
 
 TEST_FIXTURE_DIR = (
     py.path.local(os.path.dirname(os.path.realpath(__file__))) / "resources"

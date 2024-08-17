@@ -1,8 +1,7 @@
 import uuid
+from collections import namedtuple
 
 import arrow
-
-from collections import namedtuple
 
 HEADERS = ("start", "stop", "project", "id", "tags", "updated_at")
 

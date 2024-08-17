@@ -3,14 +3,15 @@ import itertools
 import json
 import operator
 import os
-from dateutil import tz
 from functools import reduce, wraps
 
 import arrow
 import click
 from click_didyoumean import DYMGroup
+from dateutil import tz
 
 import watson as _watson
+
 from .autocompletion import (
     get_frames,
     get_project_or_task_completion,
@@ -32,12 +33,12 @@ from .utils import (
     frames_to_json,
     get_frame_from_argument,
     get_start_time_for_period,
+    json_arrow_encoder,
     options,
+    parse_tags,
     safe_save,
     sorted_groupby,
     style,
-    parse_tags,
-    json_arrow_encoder,
 )
 
 

@@ -1,10 +1,11 @@
 import datetime
-from functools import reduce
 import json
 import operator
 import os
 import uuid
 from configparser import Error as CFGParserError
+from functools import reduce
+
 import arrow
 import click
 

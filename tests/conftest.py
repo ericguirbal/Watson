@@ -1,7 +1,7 @@
 """Provide fixtures for pytest-based unit tests."""
 
-from click.testing import CliRunner
 import pytest
+from click.testing import CliRunner
 
 from watson import Watson
 

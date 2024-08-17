@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-import arrow
-import random
 import os
+import random
 import sys
+
+import arrow
 
 from watson import Watson
 

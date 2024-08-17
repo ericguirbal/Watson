@@ -4,15 +4,15 @@ import json
 import os
 
 import arrow
-from click import get_app_dir
 import pytest
 import requests
+from click import get_app_dir
 
 from watson import Watson, WatsonError
 from watson.frames import Frame
 from watson.watson import ConfigParser, ConfigurationError
 
-from . import mock_read, TEST_FIXTURE_DIR
+from . import TEST_FIXTURE_DIR, mock_read
 
 
 @pytest.fixture

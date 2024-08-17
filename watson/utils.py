@@ -8,13 +8,14 @@ import os
 import shutil
 import tempfile
 from io import StringIO
-import click
+
 import arrow
+import click
+from click.exceptions import UsageError
 
 import watson as _watson
-from .fullmoon import get_last_full_moon
 
-from click.exceptions import UsageError
+from .fullmoon import get_last_full_moon
 
 
 def create_watson():

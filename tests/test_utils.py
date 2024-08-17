@@ -1,15 +1,16 @@
 """Unit tests for the 'utils' module."""
 
-import arrow
 import collections as co
 import csv
+import datetime
 import functools
 import json
-import os
-import datetime
 import operator
+import os
 from io import StringIO
 from unittest.mock import patch
+
+import arrow
 import pytest
 from click.exceptions import Abort
 from dateutil.tz import tzutc
@@ -23,14 +24,14 @@ from watson.utils import (
     frames_to_csv,
     frames_to_json,
     get_start_time_for_period,
+    json_arrow_encoder,
     make_json_writer,
+    parse_tags,
     safe_save,
     sorted_groupby,
-    parse_tags,
-    json_arrow_encoder,
 )
-from . import mock_datetime
 
+from . import mock_datetime
 
 _dt = functools.partial(datetime.datetime, tzinfo=tzutc())
 
