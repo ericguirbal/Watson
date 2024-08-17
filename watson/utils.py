@@ -79,9 +79,7 @@ def style(name, element):
 
 
 def format_timedelta(delta):
-    """
-    Return a string roughly representing a timedelta.
-    """
+    """Return a string roughly representing a timedelta."""
     seconds = int(delta.total_seconds())
     neg = seconds < 0
     seconds = abs(seconds)

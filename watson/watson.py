@@ -101,9 +101,7 @@ class Watson(object):
 
     @property
     def config(self):
-        """
-        Return Watson's config as a ConfigParser object.
-        """
+        """Return Watson's config as a ConfigParser object."""
         if not self._config:
             try:
                 config = ConfigParser()
@@ -117,16 +115,12 @@ class Watson(object):
 
     @config.setter
     def config(self, value):
-        """
-        Set a ConfigParser object as the current configuration.
-        """
+        """Set a ConfigParser object as the current configuration."""
         self._config = value
         self._config_changed = True
 
     def save(self):
-        """
-        Save the state in the appropriate files. Create them if necessary.
-        """
+        """Save the state in the appropriate files. Create them if necessary."""
         try:
             if not os.path.isdir(self._dir):
                 os.makedirs(self._dir)
@@ -299,16 +293,12 @@ class Watson(object):
 
     @property
     def projects(self):
-        """
-        Return the list of all the existing projects, sorted by name.
-        """
+        """Return the list of all the existing projects, sorted by name."""
         return sorted(set(self.frames["project"]))
 
     @property
     def tags(self):
-        """
-        Return the list of the tags, sorted by name.
-        """
+        """Return the list of the tags, sorted by name."""
         return sorted(set(tag for tags in self.frames["tags"] for tag in tags))
 
     def _get_request_info(self, route):

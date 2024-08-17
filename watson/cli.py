@@ -166,9 +166,7 @@ def cli(ctx, color):
 @click.argument("command", required=False)
 @click.pass_context
 def help(ctx, command):
-    """
-    Display help information
-    """
+    """Display help information"""
     if not command:
         click.echo(ctx.parent.get_help())
         return
@@ -182,9 +180,7 @@ def help(ctx, command):
 
 
 def _start(watson, project, tags, restart=False, start_at=None, gap=True):
-    """
-    Start project with given list of tags and save status.
-    """
+    """Start project with given list of tags and save status."""
     current = watson.start(
         project,
         tags,

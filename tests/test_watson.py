@@ -988,9 +988,7 @@ def test_rename_tag_with_time(watson):
 
 
 def test_add_success(watson):
-    """
-    Adding a new frame outside of live tracking successfully
-    """
+    """Adding a new frame outside of live tracking successfully"""
     watson.add(
         project="test_project", tags=["fuu", "bar"], from_date=6000, to_date=7000
     )
