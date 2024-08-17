@@ -59,12 +59,42 @@ pytest-datafiles = "^3.0.0"
 pytest-runner = "^6.0.1"
 pytest-mock = "^3.14.0"
 py = "^1.11.0"
-flake8 = "^7.1.1"
 tox = "^4.18.0"
 mkdocs = "^1.6.0"
 mkdocs-bootswatch = "^1.1"
+ruff = "^0.6.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.ruff]
+src = ["watson", "tests"]
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    # missing-trailing-comma
+    "COM812",
+    # undocumented-public-module
+    "D100",
+    # undocumented-public-function
+    "D103",
+    # undocumented-public-package
+    "D104",
+    # one-blank-line-before-class
+    "D203",
+    # multi-line-summary-first-line
+    "D212",
+    # non-imperative-mood
+    "D401",
+    # single-line-implicit-string-concatenation
+    "ISC001",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = [
+    # assert
+    "S101",
+]
