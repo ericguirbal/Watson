@@ -102,12 +102,12 @@ def format_timedelta(delta):
 
 
 def sorted_groupby(iterator, key, reverse=False):
-    """Similar to `itertools.groupby`, but sorts the iterator with the same key first."""
+    """Similar to `itertools.groupby`, but sorts the iterator with the same key first."""  # noqa: E501
     return itertools.groupby(sorted(iterator, key=key, reverse=reverse), key)
 
 
 def options(opt_list):
-    """Wrap the `value_proc` field in `click.prompt`, which validates that the user response is part of the list of accepted responses."""
+    """Wrap the `value_proc` field in `click.prompt`, which validates that the user response is part of the list of accepted responses."""  # noqa: E501
 
     def value_proc(user_input):
         if user_input in opt_list:
@@ -123,7 +123,7 @@ def options(opt_list):
 
 
 def get_frame_from_argument(watson, arg):
-    """Get a frame from a command line argument which can either be a position index (-1) or a frame id."""
+    """Get a frame from a command line argument which can either be a position index (-1) or a frame id."""     # noqa: E501
     # first we try to see if we are refering to a frame by
     # its position (for example -2). We only take negative indexes
     # as a positive index might also be an existing id
@@ -180,7 +180,7 @@ def get_start_time_for_period(period):
 
 
 def apply_weekday_offset(start_time, week_start):
-    """Apply the offset required to move the start date `start_time` of a week starting on Monday to that of a week starting on `week_start`."""
+    """Apply the offset required to move the start date `start_time` of a week starting on Monday to that of a week starting on `week_start`."""    # noqa: E501
     weekdays = dict(
         zip(
             [
@@ -205,7 +205,7 @@ def apply_weekday_offset(start_time, week_start):
 
 
 def make_json_writer(func, *args, **kwargs):
-    """Return a function that receives a file-like object and writes the return value of func(*args, **kwargs) as JSON to it."""
+    """Return a function that receives a file-like object and writes the return value of func(*args, **kwargs) as JSON to it."""    # noqa: E501
 
     def writer(f):
         dump = json.dumps(func(*args, **kwargs), indent=1, ensure_ascii=False)

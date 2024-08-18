@@ -79,11 +79,19 @@ src = ["watson", "tests"]
 target-version = "py310"
 
 [tool.ruff.lint]
+preview = true
 select = [
     # isort
     "I",
     # pydocstyle
     "D",
+    # pycodestyle
+    "E",
+    "W",
+]
+extend-select = [
+    # non-imperative-mood
+    "D401",
 ]
 ignore = [
     # undocumented-public-module

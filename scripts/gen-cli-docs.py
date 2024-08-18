@@ -72,7 +72,7 @@ class MkdocsContext(Context):
 
 
 def main(rowsput):
-    """Iterate over watson.cli commands, generate commands markdown documentation and write it to the rowsput file."""
+    """Iterate over watson.cli commands, generate commands markdown documentation and write it to the rowsput file."""  # noqa: E501
 
     def is_click_command(obj):
         """Test if 'obj' is a click command objects."""

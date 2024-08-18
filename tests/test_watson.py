@@ -901,7 +901,7 @@ def test_report_include_partial_frames(
 
 # renaming project updates frame last_updated time
 def test_rename_project_with_time(watson):
-    """Make sure the "last_updated" time of all relavant frames is updated when a project is renamed."""
+    """Make sure the "last_updated" time of all relavant frames is updated when a project is renamed."""    # noqa: E501
     watson.frames.add(
         "foo",
         4001,
@@ -940,7 +940,7 @@ def test_rename_project_with_time(watson):
 
 
 def test_rename_tag_with_time(watson):
-    """Make sure the "last_updated" time of all relevant frames is updated when a tag is renamed."""
+    """Make sure the "last_updated" time of all relevant frames is updated when a tag is renamed."""    # noqa: E501
     watson.frames.add(
         "foo",
         4001,
@@ -993,7 +993,7 @@ def test_add_success(watson):
 
 
 def test_add_failure(watson):
-    """Make sure a new frame outside of live tracking fails when to date is before from date."""
+    """Make sure a new frame outside of live tracking fails when to date is before from date."""    # noqa: E501
     with pytest.raises(WatsonError):
         watson.add(
             project="test_project", tags=["fuu", "bar"], from_date=7000, to_date=6000

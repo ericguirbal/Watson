@@ -324,8 +324,8 @@ def stop(watson, at_):
 
     \b
     $ watson stop --at 13:37
-    Stopping project apollo11, started an hour ago and stopped 30 minutes ago. (id: e9ccd52) # noqa: E501
-    """
+    Stopping project apollo11, started an hour ago and stopped 30 minutes ago. (id: e9ccd52)
+    """     # noqa: E501
     frame = watson.stop(stop_at=at_)
     output_str = "Stopping project {}{}, started {} and stopped {}. (id: {})"
     click.echo(
