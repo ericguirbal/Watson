@@ -1,4 +1,4 @@
-"""Unit test for the 'fullmoon' helper"""
+"""Unit test for the 'fullmoon' helper."""
 
 import arrow
 import pytest

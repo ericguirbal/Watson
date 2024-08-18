@@ -146,14 +146,12 @@ def catch_watson_error(func):
 @click.option("--color/--no-color", "color", default=None, help="(Don't) color output.")
 @click.pass_context
 def cli(ctx, color):
-    """
-    Watson is a tool aimed at helping you monitoring your time.
+    """Watson is a tool aimed at helping you monitoring your time.
 
     You just have to tell Watson when you start working on your
     project with the `start` command, and you can stop the timer
     when you're done with the `stop` command.
     """
-
     if color is not None:
         ctx.color = True if color else False
 
@@ -166,7 +164,7 @@ def cli(ctx, color):
 @click.argument("command", required=False)
 @click.pass_context
 def help(ctx, command):
-    """Display help information"""
+    """Display help information."""
     if not command:
         click.echo(ctx.parent.get_help())
         return
@@ -240,8 +238,8 @@ def _start(watson, project, tags, restart=False, start_at=None, gap=True):
 @click.pass_context
 @catch_watson_error
 def start(ctx, watson, confirm_new_project, confirm_new_tag, args, at_, gap_=True):
-    """
-    Start monitoring time for the given project.
+    """Start monitoring time for the given project.
+
     You can add tags indicating more specifically what you are working on with
     `+tag`.
 
@@ -316,8 +314,7 @@ def start(ctx, watson, confirm_new_project, confirm_new_tag, args, at_, gap_=Tru
 @click.pass_obj
 @catch_watson_error
 def stop(watson, at_):
-    """
-    Stop monitoring time for the current project.
+    """Stop monitoring time for the current project.
 
     If `--at` option is given, the provided stopping time is used. The
     specified time must be after the beginning of the to-be-ended frame and must
@@ -378,8 +375,7 @@ def stop(watson, at_):
 @click.pass_context
 @catch_watson_error
 def restart(ctx, watson, id, stop_, at_, gap_=True):
-    """
-    Restart monitoring time for a previously stopped project.
+    """Restart monitoring time for a previously stopped project.
 
     By default, the project from the last frame, which was recorded, is
     restarted, using the same tags as recorded in that frame. You can specify
@@ -450,9 +446,9 @@ def restart(ctx, watson, id, stop_, at_, gap_=True):
 @click.pass_obj
 @catch_watson_error
 def cancel(watson):
-    """
-    Cancel the last call to the start command. The time will
-    not be recorded.
+    """Cancel the last call to the start command.
+
+    The time will not be recorded.
     """
     old = watson.cancel()
     click.echo(
@@ -471,8 +467,7 @@ def cancel(watson):
 @click.pass_obj
 @catch_watson_error
 def status(watson, project, tags, elapsed):
-    """
-    Display when the current project was started and the time spent since.
+    """Display when the current project was started and the time spent since.
 
     You can configure how the date and time of when the project was started are
     displayed by setting `options.date_format` and `options.time_format` in the
@@ -481,7 +476,6 @@ def status(watson, project, tags, elapsed):
     `datetime.datetime` class.
 
     Example:
-
     \b
     $ watson status
     Project apollo11 [brakes] started seconds ago (2014-05-19 14:32:41+0100)
@@ -703,8 +697,7 @@ def report(
     aggregated=False,
     include_partial_frames=True,
 ):
-    """
-    Display a report of the time spent on each project.
+    """Display a report of the time spent on each project.
 
     If a project is given, the time spent on this project is printed.
     Else, print the total for each root project.
@@ -737,6 +730,7 @@ def report(
     \b
     $ watson report
     Mon 05 May 2014 -> Mon 12 May 2014
+
     \b
     apollo11 - 13h 22m 20s
             [brakes    7h 53m 18s]
@@ -808,7 +802,6 @@ def report(
     2014-04-01 00:00:00,2014-04-30 23:59:59,apollo11,steering,38017.0
     2014-04-01 00:00:00,2014-04-30 23:59:59,apollo11,wheels,36695.0
     """
-
     # if the report is an aggregate report, add whitespace using this
     # aggregate tab which will be prepended to the project name
     if aggregated:
@@ -1029,8 +1022,7 @@ def report(
 @click.pass_context
 @catch_watson_error
 def aggregate(ctx, watson, current, from_, to, projects, tags, output_format, pager):
-    """
-    Display a report of the time spent on each project aggregated by day.
+    """Display a report of the time spent on each project aggregated by day.
 
     If a project is given, the time spent on this project is printed.
     Else, print the total for each root project.
@@ -1488,8 +1480,7 @@ def log(
 @click.pass_obj
 @catch_watson_error
 def projects(watson):
-    """
-    Display the list of all the existing projects.
+    """Display the list of all the existing projects.
 
     Example:
 
@@ -1508,8 +1499,7 @@ def projects(watson):
 @click.pass_obj
 @catch_watson_error
 def tags(watson):
-    """
-    Display the list of all the tags.
+    """Display the list of all the tags.
 
     Example:
 
@@ -1536,8 +1526,7 @@ def tags(watson):
 @click.pass_obj
 @catch_watson_error
 def frames(watson):
-    """
-    Display the list of all frame IDs.
+    """Display the list of all frame IDs.
 
     Example:
 
@@ -1586,8 +1575,7 @@ def frames(watson):
 @click.pass_obj
 @catch_watson_error
 def add(watson, args, from_, to, confirm_new_project, confirm_new_tag):
-    """
-    Add time to a project with tag(s) that was not tracked live.
+    """Add time to a project with tag(s) that was not tracked live.
 
     Example:
 
@@ -1647,8 +1635,7 @@ def add(watson, args, from_, to, confirm_new_project, confirm_new_tag):
 @click.pass_obj
 @catch_watson_error
 def edit(watson, confirm_new_project, confirm_new_tag, id):
-    """
-    Edit a frame.
+    """Edit a frame.
 
     You can specify the frame to edit by its position or by its frame id.
     For example, to edit the second-to-last frame, pass `-2` as the frame
@@ -1790,8 +1777,9 @@ def edit(watson, confirm_new_project, confirm_new_tag, id):
 @click.pass_obj
 @catch_watson_error
 def remove(watson, id, force):
-    """
-    Remove a frame. You can specify the frame either by id or by position
+    """Remove a frame.
+
+    You can specify the frame either by id or by position
     (ex: `-1` for the last frame).
     """
     frame = get_frame_from_argument(watson, id)
@@ -1824,8 +1812,7 @@ def remove(watson, id, force):
 @click.pass_context
 @catch_watson_error
 def config(context, key, value, edit):
-    """
-    Get and set configuration options.
+    """Get and set configuration options.
 
     If `value` is not provided, the content of the `key` is displayed. Else,
     the given `value` is set.
@@ -1895,8 +1882,7 @@ def config(context, key, value, edit):
 @click.pass_obj
 @catch_watson_error
 def sync(watson):
-    """
-    Get the frames from the server and push the new ones.
+    """Get the frames from the server and push the new ones.
 
     The URL of the server and the User Token must be defined via the
     `watson config` command.
@@ -1933,8 +1919,7 @@ def sync(watson):
 @click.pass_obj
 @catch_watson_error
 def merge(watson, frames_with_conflict, force):
-    """
-    Perform a merge of the existing frames with a conflicting frames file.
+    """Perform a merge of the existing frames with a conflicting frames file.
 
     When storing the frames on a file hosting service, there is the
     possibility that the frame file goes out-of-sync due to one or
@@ -2111,8 +2096,7 @@ def merge(watson, frames_with_conflict, force):
 @click.pass_obj
 @catch_watson_error
 def rename(watson, rename_type, old_name, new_name):
-    """
-    Rename a project or tag.
+    """Rename a project or tag.
 
     Example:
 

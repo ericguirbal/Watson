@@ -23,8 +23,8 @@ def create_watson():
 
 
 def confirm_project(project, watson_projects):
-    """
-    Ask user to confirm creation of a new project
+    """Ask user to confirm creation of a new project.
+
     'project' must be a string
     'watson_projects' must be an interable.
     Returns True on accept and raises click.exceptions.Abort on reject
@@ -36,8 +36,8 @@ def confirm_project(project, watson_projects):
 
 
 def confirm_tags(tags, watson_tags):
-    """
-    Ask user to confirm creation of new tags (each separately)
+    """Ask user to confirm creation of new tags (each separately).
+
     Both 'tags' and 'watson_tags" must be iterables.
     Returns True if all accepted and raises click.exceptions.Abort on reject
     """
@@ -102,18 +102,12 @@ def format_timedelta(delta):
 
 
 def sorted_groupby(iterator, key, reverse=False):
-    """
-    Similar to `itertools.groupby`, but sorts the iterator with the same
-    key first.
-    """
+    """Similar to `itertools.groupby`, but sorts the iterator with the same key first."""
     return itertools.groupby(sorted(iterator, key=key, reverse=reverse), key)
 
 
 def options(opt_list):
-    """
-    Wrapper for the `value_proc` field in `click.prompt`, which validates
-    that the user response is part of the list of accepted responses.
-    """
+    """Wrap the `value_proc` field in `click.prompt`, which validates that the user response is part of the list of accepted responses."""
 
     def value_proc(user_input):
         if user_input in opt_list:
@@ -129,10 +123,7 @@ def options(opt_list):
 
 
 def get_frame_from_argument(watson, arg):
-    """
-    Get a frame from a command line argument which can either be a
-    position index (-1) or a frame id.
-    """
+    """Get a frame from a command line argument which can either be a position index (-1) or a frame id."""
     # first we try to see if we are refering to a frame by
     # its position (for example -2). We only take negative indexes
     # as a positive index might also be an existing id
@@ -189,10 +180,7 @@ def get_start_time_for_period(period):
 
 
 def apply_weekday_offset(start_time, week_start):
-    """
-    Apply the offset required to move the start date `start_time` of a week
-    starting on Monday to that of a week starting on `week_start`.
-    """
+    """Apply the offset required to move the start date `start_time` of a week starting on Monday to that of a week starting on `week_start`."""
     weekdays = dict(
         zip(
             [
@@ -217,10 +205,7 @@ def apply_weekday_offset(start_time, week_start):
 
 
 def make_json_writer(func, *args, **kwargs):
-    """
-    Return a function that receives a file-like object and writes the return
-    value of func(*args, **kwargs) as JSON to it.
-    """
+    """Return a function that receives a file-like object and writes the return value of func(*args, **kwargs) as JSON to it."""
 
     def writer(f):
         dump = json.dumps(func(*args, **kwargs), indent=1, ensure_ascii=False)
@@ -230,8 +215,7 @@ def make_json_writer(func, *args, **kwargs):
 
 
 def safe_save(path, content, ext=".bak"):
-    """
-    Save given content to file at given path safely.
+    """Save given content to file at given path safely.
 
     `content` may either be a (unicode) string to write to the file, or a
     function taking one argument, a file object opened for writing. The
@@ -270,8 +254,7 @@ def safe_save(path, content, ext=".bak"):
 
 
 def deduplicate(sequence):
-    """
-    Return a list with all items of the input sequence but duplicates removed.
+    """Return a list with all items of the input sequence but duplicates removed.
 
     Leaves the input sequence unaltered.
     """
@@ -283,8 +266,7 @@ def deduplicate(sequence):
 
 
 def parse_tags(values_list):
-    """
-    Return a list of tags parsed from the input values list.
+    """Return a list of tags parsed from the input values list.
 
     Find all the tags starting by a '+', even if there are spaces in them,
     then strip each tag and filter out the empty ones
@@ -313,8 +295,7 @@ def parse_tags(values_list):
 
 
 def frames_to_json(frames):
-    """
-    Transform a sequence of frames into a JSON-formatted string.
+    """Transform a sequence of frames into a JSON-formatted string.
 
     Each frame object has an equivalent pair name/value in the JSON string,
     except for 'updated_at', which is not included.
@@ -337,8 +318,7 @@ def frames_to_json(frames):
 
 
 def frames_to_csv(frames):
-    """
-    Transform a sequence of frames into a CSV-formatted string.
+    """Transform a sequence of frames into a CSV-formatted string.
 
     Each frame object has an equivalent pair name/value in the CSV string,
     except for 'updated_at', which is not included.
@@ -361,8 +341,7 @@ def frames_to_csv(frames):
 
 
 def build_csv(entries):
-    """
-    Creates a CSV string from a list of dict objects.
+    """Create a CSV string from a list of dict objects.
 
     The dictionary keys of the first item in the list are used as the header
     row for the built CSV. All item's keys are supposed to be identical.
@@ -381,8 +360,7 @@ def build_csv(entries):
 
 
 def flatten_report_for_csv(report):
-    """
-    Flattens the data structure returned by `watson.report()` for a csv export.
+    """Flattens the data structure returned by `watson.report()` for a csv export.
 
     Dates are formatted in a way that Excel (default csv module dialect) can
     handle them (i.e. YYYY-MM-DD HH:mm:ss).
@@ -426,8 +404,8 @@ def flatten_report_for_csv(report):
 
 
 def json_arrow_encoder(obj):
-    """
-    Encodes Arrow objects for JSON output.
+    """Encode Arrow objects for JSON output.
+
     This function can be used with
     `json.dumps(..., default=json_arrow_encoder)`, for example.
     If the object is not an Arrow type, a TypeError is raised

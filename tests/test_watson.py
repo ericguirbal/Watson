@@ -72,8 +72,8 @@ def test_current_with_empty_given_state(config_dir, mocker):
 
 
 def test_current_as_running_frame(watson):
-    """
-    Ensures frame can be created without a stop date.
+    """Ensure frame can be created without a stop date.
+
     Catches #417: editing task in progress throws an exception
     """
     watson.start("foo", tags=["A", "B"])
@@ -869,7 +869,7 @@ def test_report_current(mocker, config_dir):
 def test_report_include_partial_frames(
     mocker, watson, date_as_unixtime, include_partial, sum_
 ):
-    """Test report building with frames that cross report boundaries
+    """Test report building with frames that cross report boundaries.
 
     1 event is added that has 2 hours in one day and 1 in the next. The
     parametrization checks that the report for both days is empty with
@@ -901,10 +901,7 @@ def test_report_include_partial_frames(
 
 # renaming project updates frame last_updated time
 def test_rename_project_with_time(watson):
-    """
-    Renaming a project should update the "last_updated" time on any frame that
-    contains that project.
-    """
+    """Make sure the "last_updated" time of all relavant frames is updated when a project is renamed."""
     watson.frames.add(
         "foo",
         4001,
@@ -943,10 +940,7 @@ def test_rename_project_with_time(watson):
 
 
 def test_rename_tag_with_time(watson):
-    """
-    Renaming a tag should update the "last_updated" time on any frame that
-    contains that tag.
-    """
+    """Make sure the "last_updated" time of all relevant frames is updated when a tag is renamed."""
     watson.frames.add(
         "foo",
         4001,
@@ -988,7 +982,7 @@ def test_rename_tag_with_time(watson):
 
 
 def test_add_success(watson):
-    """Adding a new frame outside of live tracking successfully"""
+    """Verify a new frame outside of live tracking is added successfully."""
     watson.add(
         project="test_project", tags=["fuu", "bar"], from_date=6000, to_date=7000
     )
@@ -999,10 +993,7 @@ def test_add_success(watson):
 
 
 def test_add_failure(watson):
-    """
-    Adding a new frame outside of live tracking fails when
-    to date is before from date
-    """
+    """Make sure a new frame outside of live tracking fails when to date is before from date."""
     with pytest.raises(WatsonError):
         watson.add(
             project="test_project", tags=["fuu", "bar"], from_date=7000, to_date=6000

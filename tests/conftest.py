@@ -23,5 +23,5 @@ def runner():
 
 @pytest.fixture
 def watson_df(datafiles):
-    """Creates a Watson object with datafiles in config directory."""
+    """Create a Watson object with datafiles in config directory."""
     return Watson(config_dir=str(datafiles))

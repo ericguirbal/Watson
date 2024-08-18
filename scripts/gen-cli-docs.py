@@ -12,11 +12,12 @@ from watson import cli as watson_cli
 
 class MarkdownFormatter(HelpFormatter):
     def write_heading(self, heading):
-        """Writes a heading into the buffer."""
+        """Write a heading into the buffer."""
         self.write("### {}\n".format(heading))
 
     def write_usage(self, prog, args="", prefix="Usage: "):
-        """Writes a usage line into the buffer.
+        """Write a usage line into the buffer.
+
         :param prog: the program name.
         :param args: whitespace separated list of arguments.
         :param prefix: the prefix for the first line.
@@ -24,8 +25,7 @@ class MarkdownFormatter(HelpFormatter):
         self.write("```bash\n{} {} {}\n```\n".format(prefix, prog, args))
 
     def write_text(self, text):
-        """Writes re-indented text into the buffer."""
-
+        """Write re-indented text into the buffer."""
         should_indent = False
         rows = []
 
@@ -44,8 +44,10 @@ class MarkdownFormatter(HelpFormatter):
         self.write("{}\n".format("\n".join(rows)))
 
     def write_dl(self, rows, **kwargs):
-        """Writes a definition list into the buffer.  This is how options
-        and commands are usually formatted.
+        """Write a definition list into the buffer.
+
+        This is how options and commands are usually formatted.
+
         :param rows: a list of two item tuples for the terms and values.
         """
         rows = list(rows)
@@ -70,14 +72,10 @@ class MkdocsContext(Context):
 
 
 def main(rowsput):
-    """Iterate over watson.cli commands,
-    generate commands markdown documentation and
-    write it to the rowsput file.
-    """
+    """Iterate over watson.cli commands, generate commands markdown documentation and write it to the rowsput file."""
 
     def is_click_command(obj):
-        """A filter for click command objects"""
-
+        """Test if 'obj' is a click command objects."""
         if type(obj) is Command:
             return True
         return False

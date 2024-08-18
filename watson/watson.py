@@ -24,23 +24,25 @@ class ConfigurationError(CFGParserError, WatsonError):
 
 
 class Watson(object):
+    """Watson contains all the business logic of the application.
+
+    :param frames: If given, should be a list representing the
+                    frames.
+                    If not given, the value is extracted
+                    from the frames file.
+    :type frames: list
+
+    :param current: If given, should be a dict representing the
+                    current frame.
+                    If not given, the value is extracted
+                    from the state file.
+    :type current: dict
+
+    :param config_dir: If given, the directory where the configuration
+                       files will be
+    """
+
     def __init__(self, **kwargs):
-        """
-        :param frames: If given, should be a list representing the
-                        frames.
-                        If not given, the value is extracted
-                        from the frames file.
-        :type frames: list
-
-        :param current: If given, should be a dict representing the
-                        current frame.
-                        If not given, the value is extracted
-                        from the state file.
-        :type current: dict
-
-        :param config_dir: If given, the directory where the configuration
-                           files will be
-        """
         self._current = None
         self._old_state = None
         self._frames = None
@@ -65,8 +67,8 @@ class Watson(object):
             self.last_sync = kwargs["last_sync"]
 
     def _load_json_file(self, filename, type=dict):
-        """
-        Return the content of the the given JSON file.
+        """Return the content of the the given JSON file.
+
         If the file doesn't exist, return an empty instance of the
         given type.
         """
@@ -89,11 +91,11 @@ class Watson(object):
             )
 
     def _parse_date(self, date):
-        """Returns Arrow object from timestamp."""
+        """Return Arrow object from timestamp."""
         return arrow.Arrow.utcfromtimestamp(date).to("local")
 
     def _format_date(self, date):
-        """Returns timestamp from string timestamp or Arrow object."""
+        """Return timestamp from string timestamp or Arrow object."""
         if not isinstance(date, arrow.Arrow):
             date = arrow.get(date)
 
@@ -120,7 +122,10 @@ class Watson(object):
         self._config_changed = True
 
     def save(self):
-        """Save the state in the appropriate files. Create them if necessary."""
+        """Save the state in the appropriate files.
+
+        Create them if necessary.
+        """
         try:
             if not os.path.isdir(self._dir):
                 os.makedirs(self._dir)

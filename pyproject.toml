@@ -79,24 +79,27 @@ src = ["watson", "tests"]
 target-version = "py310"
 
 [tool.ruff.lint]
-select = ["ALL"]
+select = [
+    # isort
+    "I",
+    # pydocstyle
+    "D",
+]
 ignore = [
-    # missing-trailing-comma
-    "COM812",
     # undocumented-public-module
     "D100",
+    # undocumented-public-class
+    "D101",
+    # undocumented-public-method
+    "D102",
     # undocumented-public-function
     "D103",
     # undocumented-public-package
     "D104",
-    # one-blank-line-before-class
-    "D203",
-    # multi-line-summary-first-line
-    "D212",
-    # non-imperative-mood
-    "D401",
-    # single-line-implicit-string-concatenation
-    "ISC001",
+    # undocumented-magic-method
+    "D105",
+    # undocumented-public-init
+    "D107",
 ]
 
 [tool.ruff.lint.per-file-ignores]
@@ -104,3 +107,13 @@ ignore = [
     # assert
     "S101",
 ]
+"watson/cli.py" = [
+    # See https://click.palletsprojects.com/en/8.1.x/documentation/#preventing-rewrapping
+    # escape-sequence-in-docstring
+    "D301",
+    # blank-lines-between-headers-and-contents
+    "D412",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
