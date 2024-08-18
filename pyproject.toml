@@ -90,6 +90,8 @@ select = [
     "W",
     # pyflakes
     "F",
+    # pep8-naming
+    "N",
 ]
 extend-select = [
     # non-imperative-mood

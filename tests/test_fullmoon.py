@@ -8,13 +8,13 @@ from watson.fullmoon import get_last_full_moon
 
 def test_with_known_date():
     aniceday = arrow.Arrow(2018, 7, 27, 10, 51)
-    aniceday_lastMoon = arrow.Arrow(2018, 6, 28, 4, 55)
+    aniceday_last_moon = arrow.Arrow(2018, 6, 28, 4, 55)
     aniceday_result = get_last_full_moon(aniceday)
-    assert aniceday_result == aniceday_lastMoon
+    assert aniceday_result == aniceday_last_moon
     thenextday = aniceday.shift(days=1)
-    thenextday_lastMoon = arrow.Arrow(2018, 7, 27, 20, 22)
+    thenextday_last_moon = arrow.Arrow(2018, 7, 27, 20, 22)
     thenextday_result = get_last_full_moon(thenextday)
-    assert thenextday_result == thenextday_lastMoon
+    assert thenextday_result == thenextday_last_moon
 
 
 def test_invalid_ranges():

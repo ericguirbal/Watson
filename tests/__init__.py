@@ -15,7 +15,7 @@ TEST_FIXTURE_DIR = (
 def mock_datetime(dt, dt_module):
     class DateTimeMeta(type):
         @classmethod
-        def __instancecheck__(mcs, obj):
+        def __instancecheck__(cls, obj):
             return isinstance(obj, datetime.datetime)
 
     class BaseMockedDateTime(datetime.datetime):
@@ -31,9 +31,9 @@ def mock_datetime(dt, dt_module):
         def today(cls):
             return dt
 
-    MockedDateTime = DateTimeMeta("datetime", (BaseMockedDateTime,), {})
+    mocked_datetime = DateTimeMeta("datetime", (BaseMockedDateTime,), {})
 
-    return mock.patch.object(dt_module, "datetime", MockedDateTime)
+    return mock.patch.object(dt_module, "datetime", mocked_datetime)
 
 
 def mock_read(content):
