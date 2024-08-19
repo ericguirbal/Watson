@@ -1754,7 +1754,7 @@ def edit(watson, confirm_new_project, confirm_new_tag, id):
     if id:
         watson.frames[id] = (project, start, stop, tags)
     else:
-        watson.current = dict(start=start, project=project, tags=tags)
+        watson.current = {"start": start, "project": project, "tags": tags}
 
     watson.save()
     click.echo(

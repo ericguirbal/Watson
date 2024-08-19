@@ -304,7 +304,7 @@ class Watson:
     @property
     def tags(self):
         """Return the list of the tags, sorted by name."""
-        return sorted(set(tag for tags in self.frames["tags"] for tag in tags))
+        return sorted({tag for tags in self.frames["tags"] for tag in tags})
 
     def _get_request_info(self, route):
         config = self.config
@@ -522,12 +522,12 @@ class Watson:
                 tags = []
 
             tags_to_print = sorted(
-                set(
+                {
                     tag
                     for frame in frames
                     for tag in frame.tags
                     if tag in tags or not tags
-                )
+                }
             )
 
             for tag in tags_to_print:
