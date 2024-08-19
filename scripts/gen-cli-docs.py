@@ -13,7 +13,7 @@ from watson import cli as watson_cli
 class MarkdownFormatter(HelpFormatter):
     def write_heading(self, heading):
         """Write a heading into the buffer."""
-        self.write("### {}\n".format(heading))
+        self.write(f"### {heading}\n")
 
     def write_usage(self, prog, args="", prefix="Usage: "):
         """Write a usage line into the buffer.
@@ -22,7 +22,7 @@ class MarkdownFormatter(HelpFormatter):
         :param args: whitespace separated list of arguments.
         :param prefix: the prefix for the first line.
         """
-        self.write("```bash\n{} {} {}\n```\n".format(prefix, prog, args))
+        self.write(f"```bash\n{prefix} {prog} {args}\n```\n")
 
     def write_text(self, text):
         """Write re-indented text into the buffer."""
@@ -31,7 +31,7 @@ class MarkdownFormatter(HelpFormatter):
 
         for row in text.split("\n"):
             if should_indent:
-                row = "    {}".format(row)
+                row = f"    {row}"
 
             if "\b" in row:
                 row = row.replace("\b", "", 1)
@@ -65,7 +65,7 @@ class MkdocsContext(Context):
     @property
     def command_path(self):
         # Not so proud of it
-        return "watson {}".format(self.command.name)
+        return f"watson {self.command.name}"
 
     def make_formatter(self):
         return MarkdownFormatter()
@@ -101,7 +101,7 @@ def main(rowsput):
         cmd.format_help(ctx, formatter)
 
         # Each command is a section
-        content += "## `{}`\n\n".format(cmd_name)
+        content += f"## `{cmd_name}`\n\n"
         content += "".join(formatter.buffer)
 
     # Write the commands documentation file

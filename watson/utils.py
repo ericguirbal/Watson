@@ -30,7 +30,10 @@ def confirm_project(project, watson_projects):
     Returns True on accept and raises click.exceptions.Abort on reject
     """
     if project not in watson_projects:
-        msg = "Project '%s' does not exist yet. Create it?" % style("project", project)
+        msg = (
+            f"""Project '{style("project", project)}' does not exist yet. """
+            """Create it?"""
+        )
         click.confirm(msg, abort=True)
     return True
 
@@ -43,7 +46,7 @@ def confirm_tags(tags, watson_tags):
     """
     for tag in tags:
         if tag not in watson_tags:
-            msg = "Tag '%s' does not exist yet. Create it?" % style("tag", tag)
+            msg = f"""Tag '{style("tag", tag)}' does not exist yet. Create it?"""
             click.confirm(msg, abort=True)
     return True
 
@@ -88,15 +91,15 @@ def format_timedelta(delta):
 
     if total >= 3600:
         hours = seconds // 3600
-        stems.append("{}h".format(hours))
+        stems.append(f"{hours}h")
         seconds -= hours * 3600
 
     if total >= 60:
         mins = seconds // 60
-        stems.append("{:02}m".format(mins))
+        stems.append(f"{mins:02}m")
         seconds -= mins * 60
 
-    stems.append("{:02}s".format(seconds))
+    stems.append(f"{seconds:02}s")
 
     return ("-" if neg else "") + " ".join(stems)
 
@@ -133,7 +136,7 @@ def get_frame_from_argument(watson, arg):
             return watson.frames[index]
     except IndexError:
         raise click.ClickException(
-            style("error", "No frame found for index {}.".format(arg))
+            style("error", f"No frame found for index {arg}.")
         )
     except (ValueError, TypeError):
         pass
@@ -174,7 +177,7 @@ def get_start_time_for_period(period):
         # approximately timestamp `0`
         start_time = arrow.Arrow(1970, 1, 1)
     else:
-        raise ValueError("Unsupported period value: {}".format(period))
+        raise ValueError(f"Unsupported period value: {period}")
 
     return start_time
 
@@ -240,7 +243,7 @@ def safe_save(path, content, ext=".bak"):
     except Exception:
         try:
             os.unlink(tmpfp.name)
-        except (IOError, OSError):
+        except OSError:
             pass
         raise
     else:
@@ -416,4 +419,4 @@ def json_arrow_encoder(obj):
     if isinstance(obj, arrow.Arrow):
         return obj.for_json()
 
-    raise TypeError("Object {} is not JSON serializable".format(obj))
+    raise TypeError(f"Object {obj} is not JSON serializable")

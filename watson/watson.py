@@ -23,7 +23,7 @@ class ConfigurationError(CFGParserError, WatsonError):
     pass
 
 
-class Watson(object):
+class Watson:
     """Watson contains all the business logic of the application.
 
     :param frames: If given, should be a list representing the
@@ -75,7 +75,7 @@ class Watson(object):
         try:
             with open(filename) as f:
                 return json.load(f)
-        except IOError:
+        except OSError:
             return type()
         except ValueError as e:
             # If we get an error because the file is empty, we ignore
@@ -84,10 +84,10 @@ class Watson(object):
             if os.path.getsize(filename) == 0:
                 return type()
             else:
-                raise WatsonError("Invalid JSON file {}: {}".format(filename, e))
+                raise WatsonError(f"Invalid JSON file {filename}: {e}")
         except Exception as e:
             raise WatsonError(
-                "Unexpected error while loading JSON file {}: {}".format(filename, e)
+                f"Unexpected error while loading JSON file {filename}: {e}"
             )
 
     def _parse_date(self, date):
@@ -109,7 +109,7 @@ class Watson(object):
                 config = ConfigParser()
                 config.read(self.config_file)
             except CFGParserError as e:
-                raise ConfigurationError("Cannot parse config file: {}".format(e))
+                raise ConfigurationError(f"Cannot parse config file: {e}")
 
             self._config = config
 
@@ -155,7 +155,7 @@ class Watson(object):
                     make_json_writer(self._format_date, self.last_sync),
                 )
         except OSError as e:
-            raise WatsonError("Impossible to write {}: {}".format(e.filename, e))
+            raise WatsonError(f"Impossible to write {e.filename}: {e}")
 
     @property
     def frames(self):
@@ -322,7 +322,7 @@ class Watson(object):
 
         headers = {
             "content-type": "application/json",
-            "Authorization": "Token {}".format(token),
+            "Authorization": f"Token {token}",
         }
 
         return dest, headers
@@ -343,9 +343,7 @@ class Watson(object):
                 raise WatsonError("Unable to reach the server.")
             except AssertionError:
                 raise WatsonError(
-                    "An error occurred with the remote " "server: {}".format(
-                        response.json()
-                    )
+                    "An error occurred with the remote " f"server: {response.json()}"
                 )
 
         return self._remote_projects["projects"]
@@ -364,9 +362,7 @@ class Watson(object):
             raise WatsonError("Unable to reach the server.")
         except AssertionError:
             raise WatsonError(
-                "An error occurred with the remote " "server: {}".format(
-                    response.json()
-                )
+                "An error occurred with the remote " f"server: {response.json()}"
             )
 
         frames = response.json() or ()
@@ -408,8 +404,9 @@ class Watson(object):
             raise WatsonError("Unable to reach the server.")
         except AssertionError:
             raise WatsonError(
-                "An error occurred with the remote server (status: {}). "
-                "Response was:\n{}".format(response.status_code, response.text)
+                "An error occurred with the remote server"
+                f"(status: {response.status_code})."
+                f"Response was:\n{response.text}"
             )
 
         return frames
@@ -552,7 +549,7 @@ class Watson(object):
     def rename_project(self, old_project, new_project):
         """Rename a project in all affected frames."""
         if old_project not in self.projects:
-            raise WatsonError('Project "%s" does not exist' % old_project)
+            raise WatsonError(f"Project {old_project} does not exist")
 
         updated_at = arrow.utcnow()
         # rename project
@@ -568,7 +565,7 @@ class Watson(object):
     def rename_tag(self, old_tag, new_tag):
         """Rename a tag in all affected frames."""
         if old_tag not in self.tags:
-            raise WatsonError('Tag "%s" does not exist' % old_tag)
+            raise WatsonError(f"Tag {old_tag} does not exist")
 
         updated_at = arrow.utcnow()
         # rename tag

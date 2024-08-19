@@ -39,7 +39,7 @@ def get_project_or_task_completion(ctx, args, incomplete):
         pretended.
         """
         for cur_suggestion in tag_suggestions:
-            yield "+{cur_suggestion}".format(cur_suggestion=cur_suggestion)
+            yield f"+{cur_suggestion}"
 
     _bypass_click_bug_to_ensure_watson(ctx)
 

@@ -1255,9 +1255,7 @@ def get_last_full_moon(d):
     idx = bisect.bisect_right(fullmoons, now)
     if idx in [0, len(fullmoons)]:
         raise ValueError(
-            "watson has only full moon dates from year 2000 to 2099, not {}".format(
-                d.year
-            )
+            f"watson has only full moon dates from year 2000 to 2099, not {d.year}"
         )
 
     last = fullmoons[idx - 1]

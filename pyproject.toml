@@ -94,6 +94,8 @@ select = [
     "N",
     # flake8-bugbear
     "B",
+    # pyupgrade
+    "UP",
 ]
 extend-select = [
     # non-imperative-mood

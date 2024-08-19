@@ -30,7 +30,7 @@ class Frame(namedtuple("Frame", HEADERS)):
         except (ValueError, TypeError) as e:
             from .watson import WatsonError
 
-            raise WatsonError("Error converting date: {}".format(e))
+            raise WatsonError(f"Error converting date: {e}")
 
         start = start.to("local")
 
@@ -40,7 +40,7 @@ class Frame(namedtuple("Frame", HEADERS)):
         if tags is None:
             tags = []
 
-        return super(Frame, cls).__new__(
+        return super().__new__(
             cls, start, stop, project, id, tags, updated_at
         )
 
@@ -68,7 +68,7 @@ class Frame(namedtuple("Frame", HEADERS)):
         return self.start >= other.start
 
 
-class Span(object):
+class Span:
     def __init__(self, start, stop, timeframe="day"):
         self.timeframe = timeframe
         self.start = start.floor(self.timeframe)
@@ -81,7 +81,7 @@ class Span(object):
         return frame.start >= self.start and frame.stop <= self.stop
 
 
-class Frames(object):
+class Frames:
     def __init__(self, frames=None):
         if not frames:
             frames = []
@@ -131,7 +131,7 @@ class Frames(object):
         try:
             return next(i for i, v in enumerate(self["id"]) if v.startswith(id))
         except StopIteration:
-            raise KeyError("Frame with id {} not found.".format(id))
+            raise KeyError(f"Frame with id {id} not found.")
 
     def _get_col(self, col):
         index = HEADERS.index(col)

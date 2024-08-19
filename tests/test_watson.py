@@ -394,7 +394,7 @@ def test_save_current(mocker, watson, json_mock):
     assert json_mock.call_count == 1
     result = json_mock.call_args[0][0]
     assert result["project"] == "foo"
-    assert isinstance(result["start"], (int, float))
+    assert isinstance(result["start"], int | float)
     assert result["tags"] == ["A", "B"]
 
 
@@ -407,7 +407,7 @@ def test_save_current_without_tags(mocker, watson, json_mock):
     assert json_mock.call_count == 1
     result = json_mock.call_args[0][0]
     assert result["project"] == "foo"
-    assert isinstance(result["start"], (int, float))
+    assert isinstance(result["start"], int | float)
     assert result["tags"] == []
 
     dump_args = json_mock.call_args[1]
