@@ -96,6 +96,8 @@ select = [
     "B",
     # flake8-comprehensions
     "C4",
+    # flake8-pie
+    "PIE",
     # pyupgrade
     "UP",
 ]
