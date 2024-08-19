@@ -126,7 +126,7 @@ def options(opt_list):
 
 
 def get_frame_from_argument(watson, arg):
-    """Get a frame from a command line argument which can either be a position index (-1) or a frame id."""     # noqa: E501
+    """Get a frame from a command line argument which can either be a position index (-1) or a frame id."""  # noqa: E501
     # first we try to see if we are refering to a frame by
     # its position (for example -2). We only take negative indexes
     # as a positive index might also be an existing id
@@ -135,9 +135,7 @@ def get_frame_from_argument(watson, arg):
         if index < 0:
             return watson.frames[index]
     except IndexError:
-        raise click.ClickException(
-            style("error", f"No frame found for index {arg}.")
-        )
+        raise click.ClickException(style("error", f"No frame found for index {arg}."))
     except (ValueError, TypeError):
         pass
 
@@ -183,7 +181,7 @@ def get_start_time_for_period(period):
 
 
 def apply_weekday_offset(start_time, week_start):
-    """Apply the offset required to move the start date `start_time` of a week starting on Monday to that of a week starting on `week_start`."""    # noqa: E501
+    """Apply the offset required to move the start date `start_time` of a week starting on Monday to that of a week starting on `week_start`."""  # noqa: E501
     weekdays = dict(
         zip(
             [
@@ -209,7 +207,7 @@ def apply_weekday_offset(start_time, week_start):
 
 
 def make_json_writer(func, *args, **kwargs):
-    """Return a function that receives a file-like object and writes the return value of func(*args, **kwargs) as JSON to it."""    # noqa: E501
+    """Return a function that receives a file-like object and writes the return value of func(*args, **kwargs) as JSON to it."""  # noqa: E501
 
     def writer(f):
         dump = json.dumps(func(*args, **kwargs), indent=1, ensure_ascii=False)

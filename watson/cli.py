@@ -63,9 +63,7 @@ class MutuallyExclusiveOption(click.Option):
             style(
                 "error",
                 "The following options are mutually exclusive: " "{options}".format(
-                    options=", ".join(
-                        [f"`--{_}`" for _ in self.mutually_exclusive]
-                    )
+                    options=", ".join([f"`--{_}`" for _ in self.mutually_exclusive])
                 ),
             )
         )
@@ -323,7 +321,7 @@ def stop(watson, at_):
     \b
     $ watson stop --at 13:37
     Stopping project apollo11, started an hour ago and stopped 30 minutes ago. (id: e9ccd52)
-    """     # noqa: E501
+    """  # noqa: E501
     frame = watson.stop(stop_at=at_)
     output_str = "Stopping project {}{}, started {} and stopped {}. (id: {})"
     click.echo(
@@ -1862,9 +1860,7 @@ def config(context, key, value, edit):
             raise click.ClickException(f"No such section {section}")
 
         if not wconfig.has_option(section, option):
-            raise click.ClickException(
-                f"No such option {option} in {section}"
-            )
+            raise click.ClickException(f"No such option {option} in {section}")
 
         click.echo(wconfig.get(section, option))
     else:

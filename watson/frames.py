@@ -40,9 +40,7 @@ class Frame(namedtuple("Frame", HEADERS)):
         if tags is None:
             tags = []
 
-        return super().__new__(
-            cls, start, stop, project, id, tags, updated_at
-        )
+        return super().__new__(cls, start, stop, project, id, tags, updated_at)
 
     def dump(self):
         start = self.start.to("utc").int_timestamp

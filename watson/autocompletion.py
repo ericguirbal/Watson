@@ -9,7 +9,7 @@ def _bypass_click_bug_to_ensure_watson(ctx):
 
 
 def get_project_or_task_completion(ctx, args, incomplete):
-    """Autocomplete either organisations or tasks, depending on the shape of the current argument."""   # noqa: E501
+    """Autocomplete either organisations or tasks, depending on the shape of the current argument."""  # noqa: E501
     assert isinstance(incomplete, str)
 
     def get_incomplete_tag(args, incomplete):
