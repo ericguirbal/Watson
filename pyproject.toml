@@ -98,6 +98,8 @@ select = [
     "C4",
     # flake8-pie
     "PIE",
+    # flake8-use-pathlib: py-path
+    "PTH124",
     # pyupgrade
     "UP",
 ]

@@ -1,15 +1,11 @@
 """Utility functions for the unit tests."""
 
 import datetime
-import os
 from io import StringIO
+from pathlib import PurePath
 from unittest import mock
 
-import py
-
-TEST_FIXTURE_DIR = (
-    py.path.local(os.path.dirname(os.path.realpath(__file__))) / "resources"
-)
+TEST_FIXTURE_DIR = PurePath(__file__).parent / "resources"
 
 
 def mock_datetime(dt, dt_module):
