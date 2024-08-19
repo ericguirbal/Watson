@@ -193,6 +193,7 @@ def apply_weekday_offset(start_time, week_start):
                 "sunday",
             ],
             range(0, 7),
+            strict=True,
         )
     )
 

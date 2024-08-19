@@ -92,6 +92,8 @@ select = [
     "F",
     # pep8-naming
     "N",
+    # flake8-bugbear
+    "B",
 ]
 extend-select = [
     # non-imperative-mood
@@ -112,6 +114,8 @@ ignore = [
     "D105",
     # undocumented-public-init
     "D107",
+    # raise-without-from-inside-except
+    "B904",
 ]
 
 [tool.ruff.lint.per-file-ignores]

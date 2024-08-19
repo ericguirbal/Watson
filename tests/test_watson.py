@@ -52,7 +52,7 @@ def test_current_watson_non_valid_json(mocker, watson):
     mocker.patch("builtins.open", mocker.mock_open(read_data=content))
     mocker.patch("os.path.getsize", return_value=len(content))
     with pytest.raises(WatsonError):
-        watson.current
+        _ = watson.current
 
 
 def test_current_with_given_state(config_dir, mocker):
@@ -114,7 +114,7 @@ def test_last_sync_watson_non_valid_json(mocker, watson):
     mocker.patch("builtins.open", mocker.mock_open(read_data=content))
     mocker.patch("os.path.getsize", return_value=len(content))
     with pytest.raises(WatsonError):
-        watson.last_sync
+        _ = watson.last_sync
 
 
 def test_last_sync_with_given_state(config_dir, mocker):
@@ -176,7 +176,7 @@ def test_frames_watson_non_valid_json(mocker, watson):
     mocker.patch("builtins.open", mocker.mock_open(read_data=content))
     mocker.patch("os.path.getsize", return_value=len(content))
     with pytest.raises(WatsonError):
-        watson.frames
+        _ = watson.frames
 
 
 def test_given_frames(config_dir, mocker):
@@ -213,7 +213,7 @@ toto
     """
     mocker.patch.object(ConfigParser, "read", mock_read(content))
     with pytest.raises(ConfigurationError):
-        watson.config
+        _ = watson.config
 
 
 def test_empty_config(mocker, watson):

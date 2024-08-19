@@ -1843,7 +1843,7 @@ def config(context, key, value, edit):
 
         try:
             watson.config = None
-            watson.config  # triggers reloading config from file
+            _ = watson.config  # triggers reloading config from file
         except _watson.ConfigurationError as exc:
             watson.config = wconfig
             watson.save()

@@ -556,9 +556,9 @@ class Watson(object):
 
         updated_at = arrow.utcnow()
         # rename project
-        for frame in self.frames:
+        for id, frame in enumerate(self.frames):
             if frame.project == old_project:
-                self.frames[frame.id] = frame._replace(
+                self.frames[id] = frame._replace(
                     project=new_project, updated_at=updated_at
                 )
 
@@ -572,9 +572,9 @@ class Watson(object):
 
         updated_at = arrow.utcnow()
         # rename tag
-        for frame in self.frames:
+        for id, frame in enumerate(self.frames):
             if old_tag in frame.tags:
-                self.frames[frame.id] = frame._replace(
+                self.frames[id] = frame._replace(
                     tags=[new_tag if t == old_tag else t for t in frame.tags],
                     updated_at=updated_at,
                 )
