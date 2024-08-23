@@ -53,7 +53,7 @@ class Watson:
         self._dir = kwargs.pop("config_dir", None) or click.get_app_dir("watson")
 
         self.config_file = os.path.join(self._dir, "config")
-        self.frames_file = os.path.join(self._dir, "frames")
+        self.frames_file = os.path.join(self._dir, "frames.json")
         self.state_file = os.path.join(self._dir, "state")
         self.last_sync_file = os.path.join(self._dir, "last_sync")
 

@@ -17,7 +17,7 @@ from watson.autocompletion import (
 from . import TEST_FIXTURE_DIR
 
 AUTOCOMPLETION_FRAMES_PATH = TEST_FIXTURE_DIR / "autocompletion"
-with open(str(AUTOCOMPLETION_FRAMES_PATH / "frames")) as fh:
+with open(str(AUTOCOMPLETION_FRAMES_PATH / "frames.json")) as fh:
     N_FRAMES = len(json.load(fh))
 N_PROJECTS = 5
 N_TASKS = 3

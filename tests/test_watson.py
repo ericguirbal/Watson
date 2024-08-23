@@ -138,7 +138,17 @@ def test_last_sync_with_empty_given_state(config_dir, mocker):
 
 
 def test_frames(mocker, watson):
-    content = json.dumps([[4000, 4010, "foo", None, ["A", "B", "C"]]])
+    content = json.dumps(
+        [
+            {
+                "start": 4000,
+                "stop": 4010,
+                "project": "foo",
+                "id": None,
+                "tags": ["A", "B", "C"],
+            }
+        ]
+    )
 
     mocker.patch("builtins.open", mocker.mock_open(read_data=content))
     assert len(watson.frames) == 1
@@ -149,7 +159,7 @@ def test_frames(mocker, watson):
 
 
 def test_frames_without_tags(mocker, watson):
-    content = json.dumps([[4000, 4010, "foo", None]])
+    content = json.dumps([{"start": 4000, "stop": 4010, "project": "foo", "id": None}])
 
     mocker.patch("builtins.open", mocker.mock_open(read_data=content))
     assert len(watson.frames) == 1
@@ -180,9 +190,20 @@ def test_frames_watson_non_valid_json(mocker, watson):
 
 
 def test_given_frames(config_dir, mocker):
-    content = json.dumps([[4000, 4010, "foo", None, ["A"]]])
+    content = json.dumps(
+        [{"start": 4000, "stop": 4010, "project": "foo", "id": None, "tags": ["A"]}]
+    )
     watson = Watson(
-        frames=[[4000, 4010, "bar", None, ["A", "B"]]], config_dir=config_dir
+        frames=[
+            {
+                "start": 4000,
+                "stop": 4010,
+                "project": "bar",
+                "id": None,
+                "tags": ["A", "B"],
+            }
+        ],
+        config_dir=config_dir,
     )
 
     mocker.patch("builtins.open", mocker.mock_open(read_data=content))
@@ -435,7 +456,10 @@ def test_save_empty_current(config_dir, mocker, json_mock):
 
 
 def test_save_frames_no_change(config_dir, mocker, json_mock):
-    watson = Watson(frames=[[4000, 4010, "foo", None]], config_dir=config_dir)
+    watson = Watson(
+        frames=[{"start": 4000, "stop": 4010, "project": "foo", "id": None}],
+        config_dir=config_dir,
+    )
 
     mocker.patch("builtins.open", mocker.mock_open())
     watson.save()
@@ -444,7 +468,10 @@ def test_save_frames_no_change(config_dir, mocker, json_mock):
 
 
 def test_save_added_frame(config_dir, mocker, json_mock):
-    watson = Watson(frames=[[4000, 4010, "foo", None]], config_dir=config_dir)
+    watson = Watson(
+        frames=[{"start": 4000, "stop": 4010, "project": "foo", "id": None}],
+        config_dir=config_dir,
+    )
     watson.frames.add("bar", 4010, 4020, ["A"])
 
     mocker.patch("builtins.open", mocker.mock_open())
@@ -453,14 +480,19 @@ def test_save_added_frame(config_dir, mocker, json_mock):
     assert json_mock.call_count == 1
     result = json_mock.call_args[0][0]
     assert len(result) == 2
-    assert result[0][2] == "foo"
-    assert result[0][4] == []
-    assert result[1][2] == "bar"
-    assert result[1][4] == ["A"]
+    assert result[0]["project"] == "foo"
+    assert result[0]["tags"] == []
+    assert result[1]["project"] == "bar"
+    assert result[1]["tags"] == ["A"]
 
 
 def test_save_changed_frame(config_dir, mocker, json_mock):
-    watson = Watson(frames=[[4000, 4010, "foo", None, ["A"]]], config_dir=config_dir)
+    watson = Watson(
+        frames=[
+            {"start": 4000, "stop": 4010, "project": "foo", "id": None, "tags": ["A"]}
+        ],
+        config_dir=config_dir,
+    )
     watson.frames[0] = ("bar", 4000, 4010, ["A", "B"])
 
     mocker.patch("builtins.open", mocker.mock_open())
@@ -469,8 +501,8 @@ def test_save_changed_frame(config_dir, mocker, json_mock):
     assert json_mock.call_count == 1
     result = json_mock.call_args[0][0]
     assert len(result) == 1
-    assert result[0][2] == "bar"
-    assert result[0][4] == ["A", "B"]
+    assert result[0]["project"] == "bar"
+    assert result[0]["tags"] == ["A", "B"]
 
     dump_args = json_mock.call_args[1]
     assert dump_args["ensure_ascii"] is False
@@ -516,7 +548,7 @@ def test_save_empty_last_sync(config_dir, mocker, json_mock):
 
 
 def test_watson_save_calls_safe_save(mocker, config_dir, watson):
-    frames_file = os.path.join(config_dir, "frames")
+    frames_file = os.path.join(config_dir, "frames.json")
     watson.start("foo", tags=["A", "B"])
     watson.stop()
 
@@ -762,14 +794,16 @@ def test_tags_no_frames(watson):
 
 
 @pytest.mark.datafiles(
-    TEST_FIXTURE_DIR / "frames-with-conflict",
+    TEST_FIXTURE_DIR / "frames-with-conflict.json",
 )
 def test_merge_report(watson, datafiles):
     # Get report
     watson.frames.add("foo", 4000, 4015, id="1", updated_at=4015)
     watson.frames.add("bar", 4020, 4045, id="2", updated_at=4045)
 
-    conflicting, merging = watson.merge_report(str(datafiles) + "/frames-with-conflict")
+    conflicting, merging = watson.merge_report(
+        str(datafiles) + "/frames-with-conflict.json"
+    )
 
     assert len(conflicting) == 1
     assert len(merging) == 1
@@ -879,14 +913,14 @@ def test_report_include_partial_frames(
     """
     content = json.dumps(
         [
-            [
-                3600 * 46,
-                3600 * 49,
-                "programming",
-                "3e76c820909840f89cabaf106ab7d12a",
-                ["cli"],
-                1548797432,
-            ]
+            {
+                "start": 3600 * 46,
+                "stop": 3600 * 49,
+                "project": "programming",
+                "id": "3e76c820909840f89cabaf106ab7d12a",
+                "tags": ["cli"],
+                "updated_at": 1548797432,
+            },
         ]
     )
     mocker.patch("builtins.open", mocker.mock_open(read_data=content))

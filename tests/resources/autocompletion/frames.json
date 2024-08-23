@@ -1,0 +1,102 @@
+[
+  {
+    "start": 1539683175,
+    "stop": 1539685649,
+    "project": "project1",
+    "id": "41dcffb7bd74442794b9385c3e8891fc",
+    "tags": [
+      "tag1"
+    ],
+    "updated_at": 1539685649
+  },
+  {
+    "start": 1546588591,
+    "stop": 1546589427,
+    "project": "project2",
+    "id": "e8b53f1dda684672806e0f347d2b11fc",
+    "tags": [
+      "tag2"
+    ],
+    "updated_at": 1546589427
+  },
+  {
+    "start": 1550065199,
+    "stop": 1550068200,
+    "project": "project1",
+    "id": "ef9933131f254b6fa94dda2a85107195",
+    "tags": [
+      "tag1"
+    ],
+    "updated_at": 1550069493
+  },
+  {
+    "start": 1550150400,
+    "stop": 1550152117,
+    "project": "project3-A",
+    "id": "f4f78aa79744440b9cbd28edef1ba0b0",
+    "tags": [
+      "tag2"
+    ],
+    "updated_at": 1550152117
+  },
+  {
+    "start": 1550829600,
+    "stop": 1550831642,
+    "project": "project3-A",
+    "id": "10c6ff8612c84b239b5141cd04f10415",
+    "tags": [
+      "tag2"
+    ],
+    "updated_at": 1550831642
+  },
+  {
+    "start": 1551954000,
+    "stop": 1551956768,
+    "project": "project1",
+    "id": "e113e26dbf8d4db3ba6361a73709ffd6",
+    "tags": [
+      "tag2"
+    ],
+    "updated_at": 1551956768
+  },
+  {
+    "start": 1552489966,
+    "stop": 1552492200,
+    "project": "project2",
+    "id": "d5185c8e811a40efbad43d2ff775f5e8",
+    "tags": [
+      "tag2"
+    ],
+    "updated_at": 1552549848
+  },
+  {
+    "start": 1553507114,
+    "stop": 1553509735,
+    "project": "project3-B",
+    "id": "379f567a9d584498aa8729a170b8b8ad",
+    "tags": [
+      "tag2"
+    ],
+    "updated_at": 1553509735
+  },
+  {
+    "start": 1555050600,
+    "stop": 1555052400,
+    "project": "project4",
+    "id": "f4f7429d70454175bb87ce2254bbd925",
+    "tags": [
+      "tag3"
+    ],
+    "updated_at": 1555063210
+  },
+  {
+    "start": 1556615369,
+    "stop": 1556616625,
+    "project": "project3-B",
+    "id": "af9fe637030a465ba279abc3c1441b66",
+    "tags": [
+      "tag3"
+    ],
+    "updated_at": 1556616626
+  }
+]

@@ -47,7 +47,14 @@ class Frame(namedtuple("Frame", HEADERS)):
         stop = self.stop.to("utc").int_timestamp if self.stop else None
         updated_at = self.updated_at.int_timestamp
 
-        return (start, stop, self.project, self.id, self.tags, updated_at)
+        return {
+            "start": start,
+            "stop": stop,
+            "project": self.project,
+            "id": self.id,
+            "tags": self.tags,
+            "updated_at": updated_at,
+        }
 
     @property
     def day(self):
@@ -84,7 +91,7 @@ class Frames:
         if not frames:
             frames = []
 
-        rows = [Frame(*frame) for frame in frames]
+        rows = [Frame(**frame) for frame in frames]
         self._rows = rows
 
         self.changed = False
